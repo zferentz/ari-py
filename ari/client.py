@@ -4,7 +4,7 @@
 
 """ARI client library.
 """
-
+import weakref
 import json
 import logging
 import urlparse
@@ -28,7 +28,7 @@ class Client(object):
         self.swagger = swaggerpy.client.SwaggerClient(
             url, http_client=http_client)
         self.repositories = {
-            name: Repository(self, name, api)
+            name: Repository(weakref.proxy(self), name, api)
             for (name, api) in self.swagger.resources.items()}
 
         # Extract models out of the events resource
