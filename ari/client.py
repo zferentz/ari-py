@@ -4,6 +4,7 @@
 
 """ARI client library.
 """
+
 import weakref
 import json
 import logging
